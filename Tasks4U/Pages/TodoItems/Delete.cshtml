@@ -1,0 +1,41 @@
+﻿@page
+@model Tasks4U.Pages.TodoItems.DeleteModel
+@if (!Model.IsRejected)
+{
+    <h1>Вы уверены, что хотите удалить задание?</h1>
+}
+else
+{
+    <h1>Задание удалено</h1>
+}
+<form method="post">
+    <div class="form-group">
+        <label asp-for="TaskSummary"></label>
+        <input asp-for="TaskSummary" class="form-control" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="Message"></label>
+        @if (Model.IsRejected)
+        {
+            <textarea asp-for="Message"
+                      class="form-control"
+                      onkeyup="countChar(this, 500)"
+                      rows="5" disabled></textarea>
+        }
+        else
+        {
+            <textarea asp-for="Message"
+                      class="form-control"
+                      onkeyup="countChar(this, 500)"
+                      rows="5"></textarea>
+        }
+        <span class="float-right" id="charNum">0/500</span>
+        <span asp-validation-for="Message" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Да" class="btn btn-primary" @(Model.IsRejected ? "disabled":"") />
+    <a href="@Model.ReturnUrl" class="btn btn-secondary">Нет</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

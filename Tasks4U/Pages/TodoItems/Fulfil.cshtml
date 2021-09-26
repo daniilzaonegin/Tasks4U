@@ -1,0 +1,24 @@
+﻿@page "{id:int}"
+@model Tasks4U.Pages.TodoItems.FulfilModel
+@{
+}
+
+<h3>Выполнить задачу</h3>
+<form method="post">
+
+    <div class="form-group">
+        <label asp-for="Input.TodoItemSummary"></label>
+        <input asp-for="Input.TodoItemSummary" class="form-control" disabled />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Input.CompleteMessage"></label>
+        <textarea asp-for="Input.CompleteMessage" class="form-control @(Model.Input.IsCompleted ? "disabled": "")" ></textarea>
+        <span class="text-danger" asp-validation-for="Input.CompleteMessage"></span>
+    </div>
+
+    <input asp-for="Input.TodoItemId" hidden />
+
+    <input class="btn btn-primary" type="submit" value="Сохранить"  @(Model.Input.IsCompleted ? "disabled": "")/>
+    <a class="btn btn-outline-primary" href="@Model.ReturnUrl ">Вернуться к списку задач</a>
+</form>

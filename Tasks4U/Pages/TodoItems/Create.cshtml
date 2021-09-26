@@ -1,0 +1,45 @@
+﻿@page
+@model Tasks4U.Pages.Home.TodoItemModel
+@{
+}
+
+<h1>Создать новую задачу</h1>
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Input.FromUserName"></label> 
+        <select asp-for="Input.FromUserName" class="form-control" asp-items="@Model.RegisteredUsers" disabled>
+        </select>
+        <input type="hidden" asp-for="Input.FromUserName" value="@Model.CurrentUser.DisplayName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.ToUserName"></label>
+        <select asp-for="Input.ToUserName" class="form-control" asp-items="@Model.RegisteredUsers"></select>
+        <span asp-validation-for="Input.ToUserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.Summary"></label>
+        <input asp-for="Input.Summary" onkeyup="countChar(this, 500)" class="form-control" />
+        <span id="charNum" class="float-right">0/500</span>
+        <span asp-validation-for="Input.Summary" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.Description"></label>
+        <textarea asp-for="Input.Description" onkeyup="countChar(this, 1000)" class="form-control" rows="5"></textarea>
+        <span id="charNum" class="float-right">0/1000</span>
+        <span asp-validation-for="Input.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.When"></label>
+        <input asp-for="Input.When" value="@DateTime.Now.ToString("s")" class="form-control" />
+        <span asp-validation-for="Input.When" class="text-danger"></span>
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary" value="Создать" />
+        <a class="btn btn-outline-primary" asp-page="/TodoItems/List">Вернуться к списку</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

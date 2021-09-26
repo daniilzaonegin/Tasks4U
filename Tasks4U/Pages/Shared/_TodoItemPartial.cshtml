@@ -1,0 +1,47 @@
+﻿@model Tasks4U.Models.ViewModels.TodoItemViewModel
+@inject UserManager<Tasks4U.Models.ApplicationUser> _userManager
+<div class="card mb-1 mt-1">
+    <div class="card-body">
+        <div class="float-right">
+            <label class="font-weight-bold" asp-for="@Model.FromUserName"></label>:
+            <span class="bg-success">@Model.FromUserName</span>
+        </div>
+        <div>
+            <h5 class="card-title">@Model.Summary</h5>
+            <div class="card-text">@Model.Description</div>
+            <div class="card-link btn-group-sm mt-2">
+                @if (Model.Completed)
+                {
+                    <a class="btn-sm btn-outline-primary"
+                       asp-page="/TodoItems/Fulfil"
+                       asp-route-id="@Model.Id"
+                       asp-route-returnUrl="@($"{ViewContext.HttpContext.Request.Path}{ViewContext.HttpContext.Request.QueryString}")">
+                        Посмотреть комметарий выполнения
+                    </a>
+                }
+                else if (Model.Rejected)
+                {
+                    <a class="btn-sm btn-outline-primary"
+                       asp-page="/TodoItems/Delete"
+                       asp-route-id="@Model.Id"
+                       asp-route-returnUrl="@($"{ViewContext.HttpContext.Request.Path}{ViewContext.HttpContext.Request.QueryString}")">
+                        Посмотреть комметарий удаления
+                    </a>
+                }
+                else
+                {
+                    <a class="btn-sm btn-outline-primary" asp-page="/TodoItems/Fulfil" asp-route-id="@Model.Id">Выполнить</a>
+
+                    string displayName = (await _userManager.FindByNameAsync(User.Identity.Name))?.DisplayName;
+                    if (displayName == Model.FromUserName)
+                    {
+                        <a class="btn-sm btn-outline-secondary" asp-page="/TodoItems/Delete"
+                           asp-route-returnUrl="@($"{ViewContext.HttpContext.Request.Path}{ViewContext.HttpContext.Request.QueryString}")"
+                           asp-route-id="@Model.Id">Удалить</a>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@model string[]
+<div class="mb-1 mb-sm-0">
+    @foreach (var item in Model)
+    {
+        string btnClassName = "";
+        if (ViewData["selectedDate"].ToString() == item)
+        {
+            btnClassName = "btn btn-info";
+        }
+        else
+        {
+            btnClassName = "btn btn-outline-info";
+        }
+
+        bool completed = (bool)ViewData["completedTasks"];
+        bool rejected = (bool)ViewData["rejectedTasks"];
+        string handler = "get";
+        if (completed)
+            handler = "Completed";
+        if (rejected)
+            handler = "Rejected";
+
+            <a class="@btnClassName" asp-page="/TodoItems/List"
+               asp-route-pageNum="1"
+               asp-route-dateTime="@item"
+               asp-route-myTasks="@(ViewData["myTasks"]?.ToString() ?? "false")"
+               asp-page-handler="@(handler)">@item</a>
+    }
+</div>
