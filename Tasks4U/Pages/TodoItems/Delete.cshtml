@@ -2,11 +2,11 @@
 @model Tasks4U.Pages.TodoItems.DeleteModel
 @if (!Model.IsRejected)
 {
-    <h1>Вы уверены, что хотите удалить задание?</h1>
+    <h1>Are you sure, you want to delete this task?</h1>
 }
 else
 {
-    <h1>Задание удалено</h1>
+    <h1>Task is deleted</h1>
 }
 <form method="post">
     <div class="form-group">
@@ -32,8 +32,8 @@ else
         <span class="float-right" id="charNum">0/500</span>
         <span asp-validation-for="Message" class="text-danger"></span>
     </div>
-    <input type="submit" value="Да" class="btn btn-primary" @(Model.IsRejected ? "disabled":"") />
-    <a href="@Model.ReturnUrl" class="btn btn-secondary">Нет</a>
+    <input type="submit" value="Yes" class="btn btn-primary" @(Model.IsRejected ? "disabled":"") />
+    <a href="@Model.ReturnUrl" class="btn btn-secondary">No</a>
 </form>
 
 @section Scripts{

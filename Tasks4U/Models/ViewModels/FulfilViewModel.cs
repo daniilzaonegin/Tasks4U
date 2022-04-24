@@ -6,13 +6,13 @@ namespace Tasks4U.Models.ViewModels
     public class FulfilViewModel
     {
         [Required]
-        [DisplayName("Комментарий")]
+        [DisplayName("Complete Message")]
         public string CompleteMessage { get; set; }
 
         [Required]
         public int TodoItemId { get; set; }
 
-        [DisplayName("Задача")]
+        [DisplayName("Task")]
         public string TodoItemSummary { get; set; }
 
         public bool IsCompleted { get; set; }

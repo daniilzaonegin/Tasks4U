@@ -3,7 +3,7 @@
 @{
 }
 
-<h3>Выполнить задачу</h3>
+<h3>Resolve task</h3>
 <form method="post">
 
     <div class="form-group">
@@ -19,6 +19,6 @@
 
     <input asp-for="Input.TodoItemId" hidden />
 
-    <input class="btn btn-primary" type="submit" value="Сохранить"  @(Model.Input.IsCompleted ? "disabled": "")/>
-    <a class="btn btn-outline-primary" href="@Model.ReturnUrl ">Вернуться к списку задач</a>
+    <input class="btn btn-primary" type="submit" value="Save"  @(Model.Input.IsCompleted ? "disabled": "")/>
+    <a class="btn btn-outline-primary" href="@Model.ReturnUrl">Back</a>
 </form>

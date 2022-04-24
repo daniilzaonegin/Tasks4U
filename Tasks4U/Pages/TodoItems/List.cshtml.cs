@@ -36,13 +36,13 @@ namespace Tasks4U.Pages.TodoItems
         {
             DateTime? dateParam = GetDateFromQueryStr(dateTime);
             ApplicationUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-            int totalTasks = await _dbContext.TodoItems
+            int totalTasks = await _dbContext.TodoItems.AsNoTracking()
                 .CountAsync(item => ((myTasks == false && item.ToUserId == user.DisplayName) ||
                                      (myTasks == true && item.FromUserId == user.DisplayName)) &&
                                      (!dateParam.HasValue || item.When.Date == dateParam.Value.Date) &&
                                      item.Completed == false && item.Rejected == false);
 
-            TodoItems = await _mapper.ProjectTo<TodoItemViewModel>(_dbContext.TodoItems
+            TodoItems = await _mapper.ProjectTo<TodoItemViewModel>(_dbContext.TodoItems.AsNoTracking()
                 .Where(item => ((myTasks == false && item.ToUserId == user.DisplayName) ||
                                  (myTasks == true && item.FromUserId == user.DisplayName)))
                 .Where(item => (!dateParam.HasValue || item.When.Date == dateParam.Value.Date) && 

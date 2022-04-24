@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
     <link rel="stylesheet" href="~/Identity/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
@@ -44,25 +45,26 @@
                                 (string.Equals(handlerObj, "get")) &&
                                 ViewContext.HttpContext.Request.RouteValues["page"]?.ToString()=="/TodoItems/List" ) ? "active" : "")">
                             <a class="nav-link" asp-page="/TodoItems/List" asp-route-myTasks="true">
-                                Созданные<span class="sr-only">(current)</span>
+                                Created tasks
                             </a>
                         </li>
                         <li class="nav-item  @(vm != null && vm.PageInfo.MyTasks == false &&
                                     (ViewContext.HttpContext.Request.RouteValues.TryGetValue("handler", out handlerObj) &&
                                     (string.Equals(handlerObj, "get")) &&
                                     ViewContext.HttpContext.Request.RouteValues["page"]?.ToString()=="/TodoItems/List") ? "active" :"")">
-                            <a class="nav-link" asp-page="/TodoItems/List">Мои задачи <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" asp-page="/TodoItems/List">My tasks</a>
                         </li>
                         <li class="nav-item @((ViewContext.HttpContext.Request.RouteValues.ContainsKey("handler") &&
                                 ViewContext.RouteData.Values["handler"]?.ToString() == "Completed" &&
                                 ViewContext.HttpContext.Request.RouteValues["page"]?.ToString()=="/TodoItems/List") ? " active" :"")">
                             <a class="nav-link" asp-page="/TodoItems/List"
-                               asp-page-handler="Completed">Выполненные<span class="sr-only">(current)</span></a>
+                               asp-page-handler="Completed">Done tasks</a>
                         </li>
                         <li class="nav-item @((ViewContext.HttpContext.Request.RouteValues.ContainsKey("handler") &&
-                                ViewContext.RouteData.Values["handler"]?.ToString() == "Rejected") ? "active" :"")">
+                                ViewContext.RouteData.Values["handler"]?.ToString() == "Rejected" &&
+                                ViewContext.HttpContext.Request.RouteValues["page"]?.ToString()=="/TodoItems/List") ? "active" :"")">
                             <a class="nav-link" asp-page="/TodoItems/List"
-                               asp-page-handler="Rejected">Удаленные<span class="sr-only">(current)</span></a>
+                               asp-page-handler="Rejected">Deleted tasks</a>
                         </li>
 
                     </ul>

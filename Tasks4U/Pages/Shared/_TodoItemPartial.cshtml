@@ -16,7 +16,7 @@
                        asp-page="/TodoItems/Fulfil"
                        asp-route-id="@Model.Id"
                        asp-route-returnUrl="@($"{ViewContext.HttpContext.Request.Path}{ViewContext.HttpContext.Request.QueryString}")">
-                        Посмотреть комметарий выполнения
+                        Get complete message
                     </a>
                 }
                 else if (Model.Rejected)
@@ -25,19 +25,22 @@
                        asp-page="/TodoItems/Delete"
                        asp-route-id="@Model.Id"
                        asp-route-returnUrl="@($"{ViewContext.HttpContext.Request.Path}{ViewContext.HttpContext.Request.QueryString}")">
-                        Посмотреть комметарий удаления
+                        Get delete comment
                     </a>
                 }
                 else
                 {
-                    <a class="btn-sm btn-outline-primary" asp-page="/TodoItems/Fulfil" asp-route-id="@Model.Id">Выполнить</a>
+                    <a class="btn-sm btn-outline-primary" 
+                        asp-page="/TodoItems/Fulfil"
+                        asp-route-returnUrl="@($"{ViewContext.HttpContext.Request.Path}{ViewContext.HttpContext.Request.QueryString}")"
+                        asp-route-id="@Model.Id">Complete</a>
 
                     string displayName = (await _userManager.FindByNameAsync(User.Identity.Name))?.DisplayName;
                     if (displayName == Model.FromUserName)
                     {
                         <a class="btn-sm btn-outline-secondary" asp-page="/TodoItems/Delete"
                            asp-route-returnUrl="@($"{ViewContext.HttpContext.Request.Path}{ViewContext.HttpContext.Request.QueryString}")"
-                           asp-route-id="@Model.Id">Удалить</a>
+                           asp-route-id="@Model.Id">Delete</a>
                     }
                 }
 

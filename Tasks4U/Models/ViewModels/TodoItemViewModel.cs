@@ -10,35 +10,35 @@ namespace Tasks4U.Models.ViewModels
         public int Id { get; set; }
 
         [Required]
-        [DisplayName("Кому")]
+        [DisplayName("To Whom")]
         public string ToUserName { get; set; }
 
         [ReadOnly(true)]
         [Required]
-        [DisplayName("От")]
+        [DisplayName("From Whom")]
         public string FromUserName { get; set; }
 
         [Required]
-        [DisplayName("До какого срока сделать")]
+        [DisplayName("Todo Date")]
         public DateTime When { get; set; }
 
         [Required]
-        [DisplayName("Краткое описание")]
+        [DisplayName("Summary")]
         [StringLength(500)]
         public string Summary { get; set; }
 
-        [DisplayName("Описание задачи")]
+        [DisplayName("Task Description")]
         [StringLength(1000)]
         public string Description { get; set; }
 
-        [DisplayName("Комментарий выполнения")]
+        [DisplayName("Complete message")]
         [StringLength(500)]
         public string CompleteMessage { get; set; }
 
-        [DisplayName("Выполнено?")]
+        [DisplayName("Completed?")]
         public bool Completed { get; set; }
 
-        [DisplayName("Отменено?")]
+        [DisplayName("Rejected?")]
         public bool Rejected { get; set; }
     }
 }

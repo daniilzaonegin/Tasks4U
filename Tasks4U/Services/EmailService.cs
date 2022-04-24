@@ -19,7 +19,8 @@ namespace Tasks4U.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<EmailService> _logger;
 
-        public EmailService(IConfiguration config, IHttpClientFactory clientFactory, UserManager<ApplicationUser> userManager, ILogger<EmailService> logger)
+        public EmailService(IConfiguration config, IHttpClientFactory clientFactory, 
+            UserManager<ApplicationUser> userManager, ILogger<EmailService> logger)
         {
              _emailServiceUri = config.GetValue<Uri>("EmailServiceUri");
             _clientFactory = clientFactory;
