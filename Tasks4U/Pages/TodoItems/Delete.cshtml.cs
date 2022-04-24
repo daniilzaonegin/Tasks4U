@@ -20,14 +20,14 @@ namespace Tasks4U.Pages.TodoItems
         [BindProperty]
         public int Id { get; set; }
 
-        [DisplayName("Комментарий")]
+        [DisplayName("Comment")]
         [BindProperty]
         [StringLength(500)]
         public string Message { get; set; }
 
         public bool IsRejected { get; set; }
 
-        [DisplayName("Задача")]
+        [DisplayName("Task")]
         public string TaskSummary { get; set; }
 
 
@@ -45,7 +45,7 @@ namespace Tasks4U.Pages.TodoItems
         {
             TodoItem item = await _dbContext.TodoItems.FindAsync(id);
             if (item == null) {
-                ModelState.AddModelError(nameof(id), "Задача с заданным идентификатором не найдена");
+                ModelState.AddModelError(nameof(id), "Task not found");
                 return BadRequest(ModelState);
             }
             Id = id;
@@ -64,13 +64,13 @@ namespace Tasks4U.Pages.TodoItems
              TodoItem itemToDelete = await _dbContext.TodoItems.FindAsync(Id);
             if(itemToDelete == null)
             {
-                ModelState.AddModelError(nameof(Id), "Задача с заданным идентификатором не найдена");
+                ModelState.AddModelError(nameof(Id), "Task not found");
                 return BadRequest(ModelState);
             }
 
             if (itemToDelete.Rejected)
             {
-                ModelState.AddModelError(nameof(Id), "Задача с заданным уже отменена");
+                ModelState.AddModelError(nameof(Id), "Task is already rejected");
                 return BadRequest(ModelState);
             }
 
@@ -83,7 +83,7 @@ namespace Tasks4U.Pages.TodoItems
                 $"Пользователь {itemToDelete.FromUserId} удалил задание '{itemToDelete.Summary}'",
                 $"Пользователь {itemToDelete.FromUserId} удалил задание '{itemToDelete.Summary}'.<br/>" +
                 $"Можете больше его не делать :)");
-            TempData["Message"] = "Задача успешно удалена";
+            TempData["Message"] = "Task was deleted successfully!";
 
             return Redirect(ReturnUrl);
         }

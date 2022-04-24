@@ -35,7 +35,7 @@ namespace Tasks4U.Pages.TodoItems
             TodoItem item = await _dbContext.TodoItems.FindAsync(id);
             if(item==null)
             {
-                ModelState.AddModelError(nameof(id), "Задача с заданным идентифиактором не найдена");
+                ModelState.AddModelError(nameof(id), "Task not found");
                 return BadRequest(ModelState);
             }
 
@@ -61,13 +61,13 @@ namespace Tasks4U.Pages.TodoItems
             TodoItem item = await _dbContext.TodoItems.FindAsync(Input.TodoItemId);
             if(item==null)
             {
-                ModelState.AddModelError(nameof(Input.TodoItemId), "Задача с заданным идентифиактором не найдена");
+                ModelState.AddModelError(nameof(Input.TodoItemId), "Task not found");
                 return BadRequest(ModelState);
             }
 
             if (item.Completed)
             {
-                ModelState.AddModelError(nameof(Input.TodoItemId), "Задача с заданным идентифиактором уже завершена");
+                ModelState.AddModelError(nameof(Input.TodoItemId), "Task was already completed");
                 return BadRequest(ModelState);
             }
 
@@ -79,7 +79,7 @@ namespace Tasks4U.Pages.TodoItems
             await _emailService.SendEmailAsync(item.FromUserId, item.ToUserId, $"Задача '{item.Summary}' выполнена",
                 $"Пользователь {item.ToUserId} выполнил поставленную вами задачу.<br/> " +
                 $"Посмотреть текст выполнения вы можете по <a href='{urlHelper.PageLink("/TodoItems/List")}'>ссылке</a>");
-            TempData[nameof(ListModel.Message)] = "Задача выполнена успешно";
+            TempData[nameof(ListModel.Message)] = "Task was completed successfully";
             return RedirectToPage("/TodoItems/List");
         }
     }

@@ -77,7 +77,7 @@ namespace Tasks4U.Pages.Home
 Перейдите по <a href='{urlHelper.PageLink("/TodoItems/List")}'>ссылке</a>, чтобы посмотреть ee."
             );
 
-            TempData[nameof(ListModel.Message)] = "Задача успешно создана!";
+            TempData[nameof(ListModel.Message)] = "Task was successfully created!";
             return RedirectToPage("/TodoItems/List");
         }
 
